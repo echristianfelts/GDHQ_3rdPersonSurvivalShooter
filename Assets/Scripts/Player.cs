@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _zInput;
 
+    [SerializeField]
+    private float mouseX, mouseY;
+
     //  Get handle to character controller
     private CharacterController _controller;
 
@@ -40,9 +43,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+        Vector3 _facing = transform.localEulerAngles;
+        _facing.y += mouseX;
+        //this.transform.localEulerAngles = _facing;
+        this.transform.localRotation = Quaternion.AngleAxis(_facing.y, Vector3.up);
         // Apply mouseX to player rot y.
         // Apply mouseY to cam rot x.
 
