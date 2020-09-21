@@ -9,11 +9,10 @@ public class Player : MonoBehaviour
     private float _speed = 5.0f;
     //Jumpheight
     [SerializeField]
-    private float _jumpForce = 5.0f;
-    private float _jumpForceMod;
+    private float _jumpForce = 15.0f;
     //Gravity
     [SerializeField]
-    private float _gravity = 1.0f;
+    private float _gravity = 20.0f;
     //Direction
     private Vector3 _direction;
 
@@ -31,40 +30,41 @@ public class Player : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+
+        if (_controller == null)
+        {
+            Debug.LogError("No Character Controller Found...");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Apply mouseX to player rot y.
+        // Apply mouseY to cam rot x.
+
+        UpdateMovement();
+    }
+
+    private void UpdateMovement()
+    {
         if (_controller.isGrounded == true)
         {
-            //  wsad keys for movement
-            //  input system(horizontal, vertical)
             _xInput = Input.GetAxis("Horizontal");
             _zInput = Input.GetAxis("Vertical");
 
-            //  direction = vector to move
             _direction = new Vector3(_xInput, 0, _zInput) * _speed;
 
-            //  velocity = direction * speed
-            //
-            //  if jump
-            //  velocity = new velocity with added y
             if (Input.GetKeyDown(KeyCode.Space))
             {
-
                 _direction.y += _jumpForce;
-                //_anim.SetTrigger("Jump");
-
-                //_jumping = true;
-                //_anim.SetBool("Jumping", _jumping);
             }
         }
         _direction.y -= _gravity * Time.deltaTime;
-        
 
-        //
-        //  controler.move(wsad*time.delta)
         _controller.Move(_direction * Time.deltaTime);
     }
 }
