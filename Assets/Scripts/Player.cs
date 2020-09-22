@@ -71,6 +71,9 @@ public class Player : MonoBehaviour
         }
         _direction.y -= _gravity * Time.deltaTime;
 
+        _direction = transform.TransformDirection(_direction);  //Makes character face direction it is moving in.  Not sure I completly understand this...  but ok.
+
+
         _controller.Move(_direction * Time.deltaTime);
     }
 }
