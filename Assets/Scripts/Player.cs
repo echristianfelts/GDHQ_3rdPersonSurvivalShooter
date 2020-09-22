@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     //Direction
     private Vector3 _direction;
 
+    [Header("Input Feedback.  Output only.")]
     [SerializeField]
     private float _xInput;
     [SerializeField]
@@ -38,6 +39,9 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("No Character Controller Found...");
         }
+
+        //  Lock cursor & hide it.
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -45,6 +49,15 @@ public class Player : MonoBehaviour
     {
         UpdateMovement();
         TurnPlayer();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        //  if escape key
+        //  bring the cursor back...
+
+
     }
 
     private void UpdateMovement()
@@ -79,5 +92,11 @@ public class Player : MonoBehaviour
         Vector3 _facing = transform.localEulerAngles;
         _facing.y += mouseX;
         this.transform.localRotation = Quaternion.AngleAxis(_facing.y, Vector3.up);
+    }
+
+    void OnMouseDown()
+    {
+        // Lock the cursor
+        Cursor.visible = false;
     }
 }

@@ -5,13 +5,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private float mouseX, mouseY;
-
-    [SerializeField]
     private float _cameraResponsiveness = 1.0f;
 
     [SerializeField]
     private float _cameraCenterResponsiveness = 1.0f;
+
+    [Header("Input Display.  Output Only.")]
+    [SerializeField]
+    private float mouseX;
+    [SerializeField]
+    private float mouseY;
 
     private Vector3 _camStartAngle;
 
