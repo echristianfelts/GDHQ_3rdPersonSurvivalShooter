@@ -10,11 +10,20 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float _cameraCenterResponsiveness = 1.0f;
 
+    [SerializeField]
+    private float _cameraClampHigh = 3.0f;
+
+    [SerializeField]
+    private float _cameraClampLow = 30.0f;
+
+
     [Header("Input Display.  Output Only.")]
     [SerializeField]
     private float mouseX;
     [SerializeField]
     private float mouseY;
+    [SerializeField]
+    public float _cameraClampDisplay;
 
     private Vector3 _camStartAngle;
 
@@ -35,7 +44,18 @@ public class CameraController : MonoBehaviour
         //  Calculate.
         Vector3 _facing = transform.localEulerAngles;
         _facing.x -= mouseY* _cameraResponsiveness;
+        _facing.x = Mathf.Clamp(_facing.x, _cameraClampHigh, _cameraClampLow);
 
+        //if (_facing.x <= _cameraClampHigh)
+        //{
+        //    _facing.x = _cameraClampHigh;
+        //} else 
+        //if (_facing.x >= _cameraClampLow)
+        //{
+        //    _facing.x = _cameraClampLow;
+        //}
+
+        _cameraClampDisplay = _facing.x;
         // Set Rotation.
         this.transform.localRotation = Quaternion.AngleAxis(_facing.x, Vector3.right); 
 
