@@ -44,12 +44,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateMovement();
-
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
-        Vector3 _facing = transform.localEulerAngles;
-        _facing.y += mouseX;
-        this.transform.localRotation = Quaternion.AngleAxis(_facing.y, Vector3.up);
+        TurnPlayer();
     }
 
     private void UpdateMovement()
@@ -59,17 +54,30 @@ public class Player : MonoBehaviour
             _xInput = Input.GetAxis("Horizontal");
             _zInput = Input.GetAxis("Vertical");
 
+            ////////// Movement Player.
             _direction = new Vector3(_xInput, 0, _zInput) * _speed;
 
+            ////////// Player Jump.
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _direction.y += _jumpForce;
             }
+
+            _direction.y -= _gravity * Time.deltaTime;
+            _direction = transform.TransformDirection(_direction);  //Makes character face direction it is moving in.  Not sure I completly understand it though...
+
+            _controller.Move(_direction * Time.deltaTime);
+
         }
-        _direction.y -= _gravity * Time.deltaTime;
 
-        _direction = transform.TransformDirection(_direction);  //Makes character face direction it is moving in.  Not sure I completly understand it though...
+    }
 
-        _controller.Move(_direction * Time.deltaTime);
+    private void TurnPlayer()
+    {
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+        Vector3 _facing = transform.localEulerAngles;
+        _facing.y += mouseX;
+        this.transform.localRotation = Quaternion.AngleAxis(_facing.y, Vector3.up);
     }
 }
