@@ -8,7 +8,10 @@ public class CameraController : MonoBehaviour
     private float mouseX, mouseY;
 
     [SerializeField]
-    private float _cameraResponsiveness=1.0f;
+    private float _cameraResponsiveness = 1.0f;
+
+    [SerializeField]
+    private float _cameraCenterResponsiveness = 1.0f;
 
     private Vector3 _camStartAngle;
 
@@ -16,10 +19,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         _camStartAngle = this.transform.localEulerAngles;
-        if (_cameraResponsiveness<1.0f)
-        {
-            _cameraResponsiveness = 1.0f;
-        }
+
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         Vector3 _facing = transform.localEulerAngles;
-        _facing.x -= mouseY;
+        _facing.x -= mouseY* _cameraResponsiveness;
         //this.transform.localEulerAngles = _facing;
         this.transform.localRotation = Quaternion.AngleAxis(_facing.x, Vector3.right); 
 
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         //    this.transform.eulerAngles = _facing;
         //}
 
-        //this.transform.localEulerAngles = Vector3.MoveTowards(this.transform.localEulerAngles, _camStartAngle, Time.deltaTime * _cameraResponsiveness);
+        this.transform.localEulerAngles = Vector3.MoveTowards(this.transform.localEulerAngles, _camStartAngle, Time.deltaTime * _cameraCenterResponsiveness);
 
     }
 }

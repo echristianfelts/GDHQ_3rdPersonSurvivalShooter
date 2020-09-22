@@ -43,16 +43,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateMovement();
+
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         Vector3 _facing = transform.localEulerAngles;
         _facing.y += mouseX;
-        //this.transform.localEulerAngles = _facing;
         this.transform.localRotation = Quaternion.AngleAxis(_facing.y, Vector3.up);
-        // Apply mouseX to player rot y.
-        // Apply mouseY to cam rot x.
-
-        UpdateMovement();
     }
 
     private void UpdateMovement()
@@ -71,8 +68,7 @@ public class Player : MonoBehaviour
         }
         _direction.y -= _gravity * Time.deltaTime;
 
-        _direction = transform.TransformDirection(_direction);  //Makes character face direction it is moving in.  Not sure I completly understand this...  but ok.
-
+        _direction = transform.TransformDirection(_direction);  //Makes character face direction it is moving in.  Not sure I completly understand it though...
 
         _controller.Move(_direction * Time.deltaTime);
     }
