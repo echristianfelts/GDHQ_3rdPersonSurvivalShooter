@@ -232,12 +232,12 @@ GameObject:
   - component: {fileID: 519566327}
   - component: {fileID: 519566326}
   - component: {fileID: 519566325}
-  - component: {fileID: 519566330}
   - component: {fileID: 519566329}
   - component: {fileID: 519566331}
+  - component: {fileID: 519566330}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,18 +345,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 519566324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5289fd7b33e233d4c8b5bbdb0162368a, type: 3}
+  m_Script: {fileID: 11500000, guid: 800c29c7154ec2b4bad5453719f6def6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpForce: 15
-  _gravity: 20
-  _direction: {x: 0, y: 0, z: 0}
-  _xInput: 0
-  _zInput: 0
-  mouseX: 0
-  mouseY: 0
-  _controller: {fileID: 0}
+  clickmask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &519566331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,11 +360,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 519566324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99ee05cb6f23e3844a624b2a3c0a5af5, type: 3}
+  m_Script: {fileID: 11500000, guid: f5eafd8fdcccd7641a06fbce827c1cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickmask:
-    m_Bits: 256
+  _speed: 5
+  _jumpForce: 15
+  _gravity: 20
+  _xInput: 0
+  _zInput: 0
+  mouseX: 0
+  mouseY: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,3 +1163,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043c2570e380cc2478f2ab9fef0eadd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 3
+  _gravity: 20
