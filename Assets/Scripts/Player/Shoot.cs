@@ -21,6 +21,9 @@ public class Shoot : MonoBehaviour
         {
             Debug.Log("Pressed primary button. Screen Position :"+ Input.mousePosition);
             Vector3 clickPos = -Vector3.one;
+            //  float _screenTargetX = Screen.width * 0.5f;
+            //  float _screenTargetY = Screen.height * 0.5f;
+            //Ray ray = Camera.main.ScreenPointToRay(new Vector3(_screenTargetX, _screenTargetY, 0));
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
             RaycastHit hit;
