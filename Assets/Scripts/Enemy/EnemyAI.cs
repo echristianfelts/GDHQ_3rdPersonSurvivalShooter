@@ -52,7 +52,7 @@ public class EnemyAI : MonoBehaviour
             _direction.y = 0;
             this.transform.localRotation = Quaternion.LookRotation(_direction);
             _direction *= _speed;
-            Debug.Log("Self Pos :" + this.transform.position + "  Target Pos :" + _target.transform.position);
+            //Debug.Log("Self Pos :" + this.transform.position + "  Target Pos :" + _target.transform.position);
 
         }
 
