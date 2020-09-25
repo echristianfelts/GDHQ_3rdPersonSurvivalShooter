@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
 
     // Referece Character Controller
     private CharacterController _controller;
+    public bool sensorValue;
     
     [SerializeField]
     private float _speed = 3.0f;
@@ -51,23 +52,16 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (_currentState == EnemyState.Chase)
+        Sensor();
+        switch (_currentState)
         {
-            UpdateMovement();
-        }
+            case EnemyState.Attack:
+                Attack();
+                break;
 
-        if (_currentState == EnemyState.Attack)
-        {
-            if (Time.time > _nextAttack)
-            {
-                if (_targetHealth != null)
-                {
-                    _targetHealth.currentHealth -= _targetHealth.damageAmount;
-                }
-                _nextAttack = Time.time + _weaponReloadTime;
-            }
-
+            case EnemyState.Chase:
+                UpdateMovement();
+                break;
 
         }
     }
@@ -86,15 +80,25 @@ public class EnemyAI : MonoBehaviour
         _controller.Move(_direction * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //  begin attacking
-        if(other.tag == "Player")
-        {
-            _currentState = EnemyState.Attack;
-        }
-    }
 
+    private void Sensor()
+    {
+        sensorValue = this.transform.Find("Sensor").gameObject.GetComponent<Sensor>().sensorState;
+        //  begin attacking
+        switch (sensorValue)
+        {
+            case true:
+                _currentState = EnemyState.Attack;
+                break;
+
+            case false:
+                _currentState = EnemyState.Chase;
+                break;
+
+        }
+
+    }
+    /*
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
@@ -102,4 +106,17 @@ public class EnemyAI : MonoBehaviour
             _currentState = EnemyState.Chase;
         }
     }
+    */
+    private void Attack()
+    {
+        if (Time.time > _nextAttack)
+        {
+            if (_targetHealth != null)
+            {
+                _targetHealth.currentHealth -= _targetHealth.damageAmount;
+            }
+            _nextAttack = Time.time + _weaponReloadTime;
+        }
+    }
+
 }
