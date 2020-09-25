@@ -98,15 +98,7 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            _currentState = EnemyState.Chase;
-        }
-    }
-    */
+
     private void Attack()
     {
         if (Time.time > _nextAttack)

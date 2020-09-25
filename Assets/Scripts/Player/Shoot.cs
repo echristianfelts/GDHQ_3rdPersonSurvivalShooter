@@ -41,7 +41,7 @@ public class Shoot : MonoBehaviour
                     hit.transform.GetComponent<Health>().currentHealth -= hit.transform.GetComponent<Health>().damageAmount;
                     // instasiate blood effect at position
                     // rot effect to match normal
-                    Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+                    Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal), hit.transform);
                     Debug.Log("You Shot a thing..!!!");
 
                 }
