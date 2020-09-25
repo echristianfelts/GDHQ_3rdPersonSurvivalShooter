@@ -81,7 +81,9 @@ public class Player : MonoBehaviour
 
 
         }
+
         _direction.y -= _gravity * Time.deltaTime;
+
         _controller.Move(_direction * Time.deltaTime);
 
     }

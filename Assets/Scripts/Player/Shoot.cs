@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     public LayerMask clickmask;
+    public Transform impact;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,11 @@ public class Shoot : MonoBehaviour
                 {
 
                     hit.transform.GetComponent<Health>().currentHealth -= hit.transform.GetComponent<Health>().damageAmount;
+                    // instasiate blood effect at position
+                    // rot effect to match normal
+                    Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
                     Debug.Log("You Shot a thing..!!!");
+
                 }
             }
             //  Debug name of object you hit.
